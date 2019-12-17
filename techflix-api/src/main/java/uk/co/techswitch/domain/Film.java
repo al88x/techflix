@@ -1,9 +1,5 @@
 package uk.co.techswitch.domain;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-
-import java.time.LocalDate;
-
 public class Film {
     private String id;
     private String title;
@@ -13,7 +9,7 @@ public class Film {
     private String posterImage;
     private String video;
     private String imdbLink;
-    private Long tMDbId;
+    private Long tmdbId;
 
     public Film() { }
 
@@ -25,7 +21,7 @@ public class Film {
                 String posterImage,
                 String video,
                 String imdbLink,
-                Long tMDbId) {
+                Long tmdbId) {
         this.id = id;
         this.title = title;
         this.summary = summary;
@@ -34,7 +30,7 @@ public class Film {
         this.posterImage = posterImage;
         this.video = video;
         this.imdbLink = imdbLink;
-        this.tMDbId = tMDbId;
+        this.tmdbId = tmdbId;
     }
 
     public String getId() {
@@ -70,6 +66,6 @@ public class Film {
     }
 
     public Long getTMDbId() {
-        return tMDbId;
+        return tmdbId;
     }
 }

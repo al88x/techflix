@@ -15,9 +15,9 @@ public class FilmDetails extends Film {
                        String posterImage,
                        String video,
                        String imdbLink,
-                       Long tMDbId,
+                       Long tmdbId,
                        List<Person> cast) {
-        super(id, title, summary, releaseDate, bannerImage, posterImage, video, imdbLink, tMDbId);
+        super(id, title, summary, releaseDate, bannerImage, posterImage, video, imdbLink, tmdbId);
         this.cast = cast;
     }
 
