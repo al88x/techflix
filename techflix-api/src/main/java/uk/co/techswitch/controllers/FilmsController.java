@@ -1,5 +1,6 @@
 package uk.co.techswitch.controllers;
 
+import uk.co.techswitch.cache.InMemoryCache;
 import uk.co.techswitch.models.FilmDetailsModel;
 import uk.co.techswitch.models.FilmModel;
 import uk.co.techswitch.services.FilmsService;
@@ -13,9 +14,11 @@ import java.util.Optional;
 @Produces(MediaType.APPLICATION_JSON)
 public class FilmsController {
     private final FilmsService filmsService;
+    private InMemoryCache inMemoryCache;
 
     public FilmsController(FilmsService filmsService) {
         this.filmsService = filmsService;
+        inMemoryCache = new InMemoryCache();
     }
 
     @GET
@@ -27,6 +30,12 @@ public class FilmsController {
     @GET
     @Path("/{id}")
     public FilmDetailsModel getFilm(@PathParam("id") String id) {
-        return filmsService.getFilm(id);
+        FilmDetailsModel cachedFilm = inMemoryCache.getById(id);
+        if(cachedFilm != null){
+            return cachedFilm;
+        }
+        FilmDetailsModel film = filmsService.getFilm(id);
+        inMemoryCache.addFilmToBeCached(id, film);
+        return film;
     }
 }
